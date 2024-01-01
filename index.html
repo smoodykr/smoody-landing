@@ -1,11 +1,13 @@
 <html>
   <head>
     <link href="./style.css" rel="stylesheet" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   </head>
   <body>
     <header>
-      <p id="logo">SMOODY</p>
+     <p id="logo"> <a href="./index.html">SMOODY</a></p>
       <nav>
         <p class="nav-li">스무디 사용법</p>
         <p class="nav-li">만든 사람들</p>
@@ -37,14 +39,16 @@
         <p>더이상 나의 건강을 우연에 맡기지 마세요</p>
         <p>스무디가 당신의 건강한 성생활을 지켜드릴게요</p>
       </div>
-      <div class="copywrite-container">
+      <div class="copywrite-container" data-aos="fade-down"
+      data-aos-easing="linear"
+      data-aos-duration="1500">
         <p>The sexual health app that keeps you safe</p>
       </div>
-      <div class="intro-container">
+      <div class="intro-container" data-aos="fade-right">
         <div class="intro-item">
           <img src="./assets/intro-01.png" width="410px" />
         </div>
-        <div class="intro-item">
+        <div class="intro-item" >
           <p class="intro-title">RECORD</p>
           <p class="intro-desc">
             나의 HPV 백신 접종 정보와 STD 검사 결과를 기록해보세요
@@ -57,7 +61,7 @@
           </p>
         </div>
       </div>
-      <div class="intro2-container">
+      <div class="intro2-container"  data-aos="fade-left">
         <div class="intro-item">
           <p class="intro-title">SHARE</p>
           <p class="intro-desc">
@@ -74,7 +78,7 @@
           <img src="./assets/intro-02.png" width="410px" />
         </div>
       </div>
-      <div class="intro3-container">
+      <div class="intro3-container" data-aos="fade-right">
         <div class="intro-item">
           <img src="./assets/intro-03.png" width="410px" />
         </div>
@@ -96,7 +100,7 @@
       </div>
      
     </main>
-    <footer>
+    <footer data-aos="zoom-out-up">
       <div class="together">
         <img src="./assets/together-animation.gif"/>
       </div>
@@ -106,5 +110,8 @@
         <img id="download-apple" src="./assets/app-store-badge 1.png" width="489px" height="275px"/>
       </a>
     </footer>
+    <script>
+      AOS.init();
+    </script>
   </body>
 </html>

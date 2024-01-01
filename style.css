@@ -53,6 +53,11 @@ header #logo{
   padding: 18px 20px;
 }
 
+#logo a{
+  color: inherit;
+  text-decoration: none;
+}
+
 header #logo:hover{
   color:#8DAEF5;
   cursor: pointer;
@@ -64,6 +69,11 @@ header #logo:hover{
   padding: 30px 20px;
   font-family: 'Pretendard-Medium';
   font-size:1rem;
+}
+
+.nav-li:hover{
+  cursor: pointer;
+  color: #8DAEF5;
 }
 
 .home{
