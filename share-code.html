@@ -1,0 +1,86 @@
+<html>
+  <head>
+    <link href="./style.css" rel="stylesheet" />
+    <link href="./style-share-code.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+  <body>
+    <div class="modal">
+      <div class="modal-body">
+        <div id="login">
+          <p id="modal-logo">SMOODY</p>
+          <div id="login-body">
+            <p><input id="email" type="email"/></p>
+            <p><input id="password" type="password"/></p>
+          </div>
+          <button class="confirm-btn" onclick="moveToLogin()">로그인</button>
+        </div>
+        <div id="signup">
+          
+        </div>
+      </div>
+    </div>
+  </body>
+  <script>
+    const modal = document.querySelector(".modal");
+    const loginModal = document.querySelector(".login");
+    const signupModal = document.querySelector(".signup");
+
+    // function : 로그인 모달 화면
+    const moveToLogin = function(){
+      if(loginModal === undefined || loginModal === null){
+        console.log('login modal is not found');
+        return;
+      }
+      if(signupModal === undefined || signupModal === null){
+        console.log('signup modal is not found');
+        return;
+      }
+
+      loginModal.style.display='block';
+      signupModal.style.display = 'none';
+    }
+
+    // funciton : 회원가입 모달 화면
+    const moveToSignUp = function(){
+      if(signupModal === undefined || signupModal === null){
+        console.log('signup modal is not found');
+        return;
+      }
+
+      loginModal.style.display = 'none';
+      signupModal.style.display='block';
+    }
+    
+    /// function : 모달 보기
+    const showModal = function(){
+      if(modal === undefined || modal === null){
+        console.log('modal is not found');
+        return;
+      }
+
+      modal.style.display = 'flex';
+    }
+
+    /// function : 모달 닫기
+    const closeModal = function(){
+      if(modal === undefined || modal === null){
+        console.log('modal is not found');
+        return;
+      }
+
+      modal.style.display = 'none';
+    }
+
+    /// function : 토큰 체크
+    const checkToken = function(){
+      const token = window.localStorage.getItem('token');
+      if(token === undefined || token === null){
+        showModal();
+        return;
+      }
+    }
+
+    checkToken();
+  </script>
+</html>
