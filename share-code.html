@@ -5,6 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
   </head>
   <body>
+    <div id="share-container">
+      <div id="share-body">
+        <p>공유받은 코드를 입력해주세요.</p>
+        <input id="share-code" type="text" placeholder="ABCDE"/><button id="share-btn">확인</button>
+      </div>
+    </div>
+    <!-- 사진 공유시 보일 부분 -->
+    <div id="share-content">
+    </div>
     <div class="modal">
       <div class="modal-body">
         <div id="login">
@@ -13,7 +22,7 @@
             <p><input id="id" type="text" placeholder="아이디"/></p>
             <p><input id="password" type="password" placeholder="비밀번호"/></p>
           </div>
-          <button class="confirm-btn" onclick="moveToLogin()">로그인</button>
+          <button class="confirm-btn" onclick="login()">로그인</button>
           <!-- 구분선 -->
           <br/><br/><br/>
           <hr style="width:90%">
@@ -96,7 +105,18 @@
       adAgreement.checked = checked;
     }
 
-    // function : 로그인 모달 화면
+    // function: 로그인
+    const login = function(){
+      if(loginId.value=== '' || loginPasswd.value === ''){
+        alert('로그인 정보를 입력해주세요');
+        return;
+      }
+
+      console.log('fetch api');
+      closeModal();
+    }
+
+    // function : 로그인 모달 화면 이동
     const moveToLogin = function(){
       if(loginModal === undefined || loginModal === null){
         console.log('login modal is not found');
@@ -224,6 +244,7 @@
       }
 
       console.log('fetch api');
+      moveToLogin();
     }
 
     checkToken();
