@@ -18,7 +18,7 @@
 
 
   width:400px;  
-  height:600px; 
+  height:450px; 
 
   padding:40px;  
 
@@ -44,7 +44,7 @@
 }
 
 /* 로그인 모달 화면 관련 */
-#modal-logo{
+.modal-logo{
   font-size: 2rem;
   font-family: 'Pretendard-Bold';
   padding: 18px 20px;
@@ -65,4 +65,90 @@
   border-radius: 5px;
   outline: none;
   padding: 10px 20px;
+}
+
+.modal-desc{
+  color: #999999;
+}
+
+#signup-body{
+  overflow-y: auto;
+  max-height:300px; 
+  height:400px; 
+}
+
+#signup-info{
+  text-align: left;
+  padding: 0 10px;
+
+}
+
+#signup-info input[type=text],input[type=email],input[type=password],input[type=date]{
+  margin-top:5px;
+  width: 340px;
+  height: 40px;
+  margin-bottom:10px;
+  border: 0.2px solid #b3b3b3;
+  border-radius: 5px;
+  outline: none;
+  padding: 10px 20px;
+}
+
+
+#password-valid{
+  margin-top:0px;
+}
+
+.signup-label{
+  margin-top:10px;
+  color: #333333;
+  font-weight: 700;
+}
+
+#password-desc{
+  margin-top:5px;
+  color:#b3b3b3;
+  font-size: 13px;
+}
+
+#signup-body::-webkit-scrollbar{
+  width: 5px;
+}
+#signup-body::-webkit-scrollbar-track {
+  background-color: #eeeeee;
+}
+#signup-body::-webkit-scrollbar-thumb { 
+  background-color: #8DAEF5;
+}
+#signup-body::-webkit-scrollbar-button {
+  display: none;
+}
+
+#agreement p{
+  display: grid;
+  grid-template-columns: 0.3fr 3fr 1fr;
+  font-size: 14px;
+}
+
+#agreement label, a{
+  display: inline-block;
+  vertical-align: top;
+  padding-top: 2px;
+}
+
+#agreement #all{
+  font-size:15px;
+  color: #8DAEF5;
+  font-weight: 800;
+}
+
+#signup-btn {
+  font-weight: 700;
+  font-size: large;
+  color: #333333;
+  cursor: pointer;
+}
+
+#signup-btn:hover{
+  color:#8DAEF5 ;
 }

@@ -8,23 +8,93 @@
     <div class="modal">
       <div class="modal-body">
         <div id="login">
-          <p id="modal-logo">SMOODY</p>
+          <p class="modal-logo">SMOODY</p>
           <div id="login-body">
-            <p><input id="email" type="email"/></p>
-            <p><input id="password" type="password"/></p>
+            <p><input id="id" type="text" placeholder="아이디"/></p>
+            <p><input id="password" type="password" placeholder="비밀번호"/></p>
           </div>
           <button class="confirm-btn" onclick="moveToLogin()">로그인</button>
+          <!-- 구분선 -->
+          <br/><br/><br/>
+          <hr style="width:90%">
+          <!-- 회원가입모드 진입-->
+          <br/><br/>
+          <span class="modal-desc">아직 가입 전이라면?&nbsp;&nbsp;&nbsp;</span><span id="signup-btn" onclick="moveToSignUp()">회원가입</span>
         </div>
         <div id="signup">
-          
+          <p class="modal-logo">SMOODY</p>
+          <div id="signup-body">
+            <div id="signup-info">
+              <p class="signup-label">아이디</p>
+              <input id="signup-id" type="text" placeholder="아이디를 입력해주세요."/>
+              <p class="signup-label">비밀번호</p>
+              <p id="password-desc">6자리 이상 영문, 숫자, 특수 기호 조합</p>
+              <input id="signup-password" type="password" placeholder="비밀번호를 입력해주세요."/>
+              <p><input id="password-valid" type="password" placeholder="비밀번호를 한번 더 입력해주세요."/></p>
+              <p class="signup-label">이메일</p>
+              <input id="email" type="email" placeholder="이메일을 입력해주세요."/>
+              <p class="signup-label">이름</p>
+              <input id="name" type="text" placeholder="이름을 입력해주세요."/>
+              <p class="signup-label">생년월일</p>
+              <input id="birth" type="date" placeholder="예) 19900101"/>
+              <br/><br/>
+              <div id="agreement"> 
+                <p><input id="all" type="checkbox" onclick="onclickAllAgreement(event)"/><label for="all" id="all">전체 동의</label></p>
+                <p><input id="terms" type="checkbox"/><label for="terms">(필수) 서비스 이용약관 동의</label><a href="https://zinc-ball-a5c.notion.site/b999aab93ff34252be339b36235e260b" target="_blank">자세히 보기</a></p>
+                <p><input id="privacy" type="checkbox"/><label for="privacy">(필수) 개인정보 처리방침 동의</label><a href="https://zinc-ball-a5c.notion.site/fc5c848b6d0a47599a5054b6bd9fd351" target="_blank">자세히 보기</a></p>
+                <p><input id="privacy_use" type="checkbox"/><label for="privacy_use">(필수) 개인정보 수집 및 이용</label><a href="https://zinc-ball-a5c.notion.site/87e3d5f4fd274fc4981d1de92db60a65" target="_blank">자세히 보기</a></p>
+                <p><input id="sensitive_info" type="checkbox"/><label for="sensitive_info">(필수) 개인 민감(건강)정보 처리방침 동의</label><a href="https://zinc-ball-a5c.notion.site/dab7e335963a4954a3e51d455527b434" target="_blank">자세히 보기</a></p>
+                <p><input id="ad_agreement" type="checkbox"/><label for="ad_agreement">(선택) 광고수신동의</label><a href="https://zinc-ball-a5c.notion.site/1c5ff30ec51b475dad1d455e778acf82" target="_blank">자세히 보기</a></p>
+              </div>
+            </div>
+          </div>
+          <br/><br/>
+          <button class="confirm-btn" onclick="signup()">회원가입</button>
         </div>
       </div>
     </div>
   </body>
+  <script src="./service.js"></script>
   <script>
     const modal = document.querySelector(".modal");
-    const loginModal = document.querySelector(".login");
-    const signupModal = document.querySelector(".signup");
+    const loginModal = document.querySelector("#login");
+    const signupModal = document.querySelector("#signup");
+
+    // 동의 관련 Element
+    const allAgree = document.querySelector("#all");
+    const terms = document.querySelector("#terms");
+    const privacy = document.querySelector("#privacy");
+    const privacyUse = document.querySelector("#privacy_use");
+    const sensitiveInfo = document.querySelector("#sensitive_info");
+    const adAgreement = document.querySelector("#ad_agreement");
+    
+    // 회원가입 관련 Element
+    const signupId = document.querySelector('#signup-id');
+    const signupPasswd = document.querySelector('#signup-password');
+    const passwdValid = document.querySelector('#password-valid');
+    const signupEmail = document.querySelector('#email');
+    const name = document.querySelector('#name');
+    const birth = document.querySelector('#birth');
+
+    // 로그인 관련 Element
+    const loginId = document.querySelector('#id');
+    const loginPasswd = document.querySelector('#password');
+
+    // function: 회원가입 - 전체 동의시
+    const onclickAllAgreement = function(event){
+      const checked = event.target.checked;
+
+      if(terms===undefined || privacy===undefined || privacyUse===undefined || sensitiveInfo===undefined || adAgreement===undefined){
+        console.log('cannot found element');
+        return;
+      }
+
+      terms.checked = checked;
+      privacy.checked = checked;
+      privacyUse.checked = checked;
+      sensitiveInfo.checked = checked;
+      adAgreement.checked = checked;
+    }
 
     // function : 로그인 모달 화면
     const moveToLogin = function(){
@@ -60,6 +130,8 @@
       }
 
       modal.style.display = 'flex';
+      loginModal.style.display='block';
+      signupModal.style.display='none';
     }
 
     /// function : 모달 닫기
@@ -79,6 +151,79 @@
         showModal();
         return;
       }
+    }
+
+    // funciton: 비밀번호 규칙 검증
+    const validatePassword = function(password){
+      return String(password)
+        .match(
+          /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/
+        );
+      
+    }
+    
+    // function: 이메일 검증
+    const validateEmail = (email) => {
+      return String(email)
+        .toLowerCase()
+        .match(
+          /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        );
+    };
+
+    // function: 회원가입
+    const signup = function(){
+      if(signupId.value === ''){
+        alert('가입 아이디를 입력해주세요');
+        return;
+      }
+      if(signupPasswd.value === ''){
+        alert('비밀번호를 입력해주세요');
+        return;
+      }
+      if(signupPasswd.value != passwdValid.value){
+        alert('입력하신 비밀번호와 검증용 비밀번호가 일치하지 않습니다');
+        return;
+      }
+      if(signupPasswd.value != ''){
+        if(!validatePassword(signupPasswd.value)){
+          alert('규칙에 맞는 비밀번호를 입력해주세요');
+          console.log('password is invalid');
+          return;
+        }
+      }
+
+      if(signupEmail.value===''){
+        alert('이메일을 입력해주세요')
+        return;
+      }
+      if(signupEmail.value != ''){
+        if(!validateEmail(email.value)){
+          alert('정확한 이메일을 입력해주세요');
+          console.log('email is invalid');
+          return;
+        }
+      }
+      if(name.value ===''){
+        alert('이름을 입력해주세요');
+        return;
+      }
+      if(birth.value === ''){
+        alert('생년월일을 입력해주세요');
+        return;
+      }
+
+      if(terms===undefined || privacy===undefined || privacyUse===undefined || sensitiveInfo===undefined || adAgreement===undefined){
+        console.log('cannot found element');
+        return;
+      }
+
+      if(!terms.checked || !privacy.checked || !privacyUse.checked || !sensitiveInfo){
+        alert('필수 동의 항목에 체크해주세요.');
+        return;
+      }
+
+      console.log('fetch api');
     }
 
     checkToken();
